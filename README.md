@@ -1,5 +1,7 @@
 # Sudoku-Game
 
+Live link- [game link](https://singhsoumya0109.github.io/Sudoku-Game/)
+
 A simple and interactive Sudoku game built using HTML, CSS, and JavaScript. This project allows users to play Sudoku with a clean and responsive interface, offering features like number selection and error tracking for incorrect moves.
 
 ## Table of Contents
