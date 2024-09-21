@@ -43,7 +43,7 @@ body {
 }
 
 .info {
-    margin-top: 10%;
+    margin-top: 7%;
     background-color: #b9d4f0; /* Light background for the instruction box */
     padding: 15px;
     margin-bottom: 20px;
@@ -67,6 +67,36 @@ body {
     margin: 10px 0;
 }
 
+/* Footer styling */
+footer {
+    background-color: grey; /* Light gray background */
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    font-family: Arial, sans-serif;
+    border-top: 1px solid #ccc;
+}
+
+footer p {
+    margin: 0;
+    color: black;
+    font-weight: 50000;
+}
+
+footer a {
+    color: #6600cc; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #003366; /* Change color on hover */
+}
 
 .hide
 {
