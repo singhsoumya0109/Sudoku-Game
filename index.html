@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,16 +9,27 @@
 <body>
     <h1>Sudoku</h1>
     <hr>
-    <div class="errors">
-        <h2>Errors-0</h2>
+    <div class="game">
+        <div class="errors-container">
+            <div class="errors">
+                <h2>Errors-0</h2>
+            </div>
+            <div class="timer">
+                <h3>00:00</h3>
+            </div>
+        </div>
+        <div class="board"></div>
+        <br>
+        <div class="digits"></div>
     </div>
-    <div class="board">
-
-    </div>
-    <br>
-    <div class="digits">
-
+    
+    <div class="result hide">
+       <h1></h1>
+       <button class="new-game">New game</button>
     </div>
 </body>
 <script src="script.js"></script>
-</html>
+</html> 
+
+
+

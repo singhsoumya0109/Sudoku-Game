@@ -1,4 +1,4 @@
-body{
+body {
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -8,22 +8,40 @@ body{
     font-weight: bold;
     background-color: black;
 }
-.errors h2
+
+
+.hide
 {
-    color: red;
+    display: none;
+}
+.errors-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Adjust space between Errors and Timer */
+    margin-bottom: 20px; /* Add some spacing below */
 }
 
-.board
-{
-    width: 405px;
-    height: 405px;
+.errors h2 {
+    color: red;
+    margin: 0; /* Remove default margins */
+}
+
+.timer h3 {
+    color: white; /* Set the timer text color */
+    margin: 0; /* Remove default margins */
+}
+
+.board {
+    width: 407px;
+    height: 407px;
     background-color: gray;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
 }
-.tile
-{
+
+.tile {
     width: 43px;
     height: 43px;
     border: 1px solid;
@@ -33,12 +51,12 @@ body{
     justify-content: center;
     align-items: center;
 }
-.selected
-{
+
+.selected {
     background-color: rgb(0, 0, 0);
 }
-.digits
-{
+
+.digits {
     background-color: gray;
     width: 405px;
     height: 45px;
@@ -46,8 +64,8 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.number
-{
+
+.number {
     width: 43px;
     height: 43px;
     border: 1px solid;
@@ -58,12 +76,15 @@ body{
     align-items: center;
 }
 
-.horizontal-border
-{
-    border-bottom: 1px solid black;
+.tile:hover, .number:hover {
+    cursor: pointer;
 }
 
-.vectical-border
-{
-    border-right: 1px solid black;
+
+.horizontal-border {
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.vertical-border {
+    border-right: 2px solid rgb(0, 0, 0);
 }
