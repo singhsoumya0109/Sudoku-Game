@@ -10,6 +10,64 @@ body {
 }
 
 
+.level-buttons {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.level-buttons:nth-child(1) { 
+    background-color: #28a745; 
+}
+
+.level-buttons:nth-child(2) { 
+    background-color: #ffc107; 
+    color: black; 
+}
+
+.level-buttons:nth-child(3) { 
+    background-color: #dc3545; 
+}
+
+.level-buttons:hover {
+    opacity: 0.8; 
+}
+
+.level-buttons:focus {
+    outline: none; 
+}
+
+.info {
+    margin-top: 10%;
+    background-color: #b9d4f0; /* Light background for the instruction box */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ced4da; /* Light border to frame instructions */
+    font-family: Arial, sans-serif;
+    color: #343a40; /* Dark color for the text */
+    text-align: left;
+}
+
+.info p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.info ul {
+    margin-left: 20px;
+}
+
+.info li {
+    margin: 10px 0;
+}
+
+
 .hide
 {
     display: none;
@@ -18,18 +76,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Adjust space between Errors and Timer */
-    margin-bottom: 20px; /* Add some spacing below */
+    gap: 20px; 
+    margin-bottom: 20px; 
 }
 
 .errors h2 {
     color: red;
-    margin: 0; /* Remove default margins */
+    margin: 0; 
 }
-
 .timer h3 {
-    color: white; /* Set the timer text color */
-    margin: 0; /* Remove default margins */
+    color: white; 
+    margin: 0; 
 }
 
 .board {

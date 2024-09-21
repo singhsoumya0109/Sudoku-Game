@@ -4,30 +4,66 @@ let error = 0;
 let seconds = 0;
 let minutes = 0;
 let timer = null;
-
+let difficulty="";
 const timerBox = document.querySelector(".timer h3");
 const result = document.querySelector(".result");
 const resultText = document.querySelector(".result h1");
 const game = document.querySelector(".game");
 const newgame = document.querySelector(".new-game");
 let tiles = document.querySelectorAll(".tile");
-
+const levelbuttons=document.querySelectorAll(".level-buttons");
+const level=document.querySelector(".level")
 window.onload = function () {
-    initializeGame();
+    selectLevel();
 }
 
 newgame.addEventListener("click", () => {
     initializeGame();
 });
 
+
+function selectLevel()
+{
+    for(let i=0;i<3;i++)
+    {
+        levelbuttons[i].id=i;
+        levelbuttons[i].addEventListener("click",
+            ()=>{ 
+                setLevel(levelbuttons[i]);
+            }
+        );
+    }
+}
+
+
+function setLevel(levelbutton)
+{
+    let id=levelbutton.id;
+    if(id==="0")
+    {
+        difficulty="easy";
+    }
+    else if(id==="1")
+    {
+        difficulty="medium";
+    }
+    else if(id==="2")
+    {
+        difficulty="hard";
+    }
+    level.classList.add("hide");
+    initializeGame();
+}
+
 function initializeGame() {
     game.classList.remove("hide");
     result.classList.add("hide");
+    level.classList.add("hide");
     if (numSelected != null) {
         numSelected.classList.remove("selected");
     }
 
-    let { puzzle, solution } = generateSudoku(40); // Generate a new puzzle with 50 empty spots
+    let { puzzle, solution } = generateSudoku(difficulty);
 
     // Reset digits
     const digitsContainer = document.querySelector(".digits");
@@ -138,96 +174,126 @@ function stopTimer() {
     clearInterval(timer);
 }
 
-// Sudoku generation logic
-function generateSudoku(emptySpaces) {
-    let solution = generateCompletedBoard();
-    let puzzle = deepCopyBoard(solution);
-
-    // Remove numbers to create the puzzle
-    for (let i = 0; i < emptySpaces; i++) {
-        let row, col;
-        do {
-            row = Math.floor(Math.random() * 9);
-            col = Math.floor(Math.random() * 9);
-        } while (puzzle[row][col] === 0); // Ensure we are removing only filled cells
-        puzzle[row][col] = 0; // Remove the number
-    }
-
-    return { puzzle, solution };
-}
-
-// Helper to create a deep copy of the board
-function deepCopyBoard(board) {
-    return board.map(row => row.slice());
-}
-
-// Simple backtracking algorithm to generate a complete Sudoku board
-function generateCompletedBoard() {
-    let board = Array.from({ length: 9 }, () => Array(9).fill(0));
-    solveBoard(board);
-    return board;
-}
-
-// Backtracking Sudoku solver (used for generation)
-function solveBoard(board) {
-    let emptyCell = findEmptyCell(board);
-    if (!emptyCell) {
-        return true; // Board is complete
-    }
-
-    let [row, col] = emptyCell;
-    for (let num = 1; num <= 9; num++) {
-        if (isValidPlacement(board, num, row, col)) {
-            board[row][col] = num;
-
-            if (solveBoard(board)) {
-                return true;
-            }
-
-            board[row][col] = 0; // Backtrack
-        }
-    }
-    return false;
-}
-
-// Find an empty cell (0) in the board
-function findEmptyCell(board) {
-    for (let r = 0; r < 9; r++) {
-        for (let c = 0; c < 9; c++) {
-            if (board[r][c] === 0) {
-                return [r, c];
-            }
-        }
-    }
-    return null;
-}
-
-// Check if a number can be placed in a given cell
-function isValidPlacement(board, num, row, col) {
-    // Check row
-    for (let c = 0; c < 9; c++) {
-        if (board[row][c] === num) {
+// Algorithm for generating Sudoku puzzles and solutions
+function isValid(grid, row, col, num) {
+    for (let i = 0; i < 9; i++) {
+        if (grid[row][i] === num || grid[i][col] === num) {
             return false;
         }
     }
 
-    // Check column
-    for (let r = 0; r < 9; r++) {
-        if (board[r][col] === num) {
-            return false;
-        }
-    }
+    const boxRow = Math.floor(row / 3) * 3;
+    const boxCol = Math.floor(col / 3) * 3;
 
-    // Check 3x3 box
-    let boxRow = Math.floor(row / 3) * 3;
-    let boxCol = Math.floor(col / 3) * 3;
-    for (let r = boxRow; r < boxRow + 3; r++) {
-        for (let c = boxCol; c < boxCol + 3; c++) {
-            if (board[r][c] === num) {
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (grid[boxRow + i][boxCol + j] === num) {
                 return false;
             }
         }
     }
-
     return true;
+}
+
+function createSolvedGrid() {
+    const grid = Array.from({ length: 9 }, () => Array(9).fill(0));
+
+    function solve() {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (grid[row][col] === 0) {
+                    const nums = shuffle([...Array(9).keys()].map(x => x + 1)); // Randomize numbers 1-9
+                    for (let num of nums) {
+                        if (isValid(grid, row, col, num)) {
+                            grid[row][col] = num;
+                            if (solve()) return true;
+                            grid[row][col] = 0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    solve();
+    return grid;
+}
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function removeCells(grid, numClues) {
+    const puzzle = grid.map(row => [...row]);
+    let cellsToRemove = 81 - numClues;
+
+    while (cellsToRemove > 0) {
+        const row = Math.floor(Math.random() * 9);
+        const col = Math.floor(Math.random() * 9);
+
+        if (puzzle[row][col] !== 0) {
+            puzzle[row][col] = 0;
+            cellsToRemove--;
+        }
+    }
+
+    return puzzle;
+}
+
+function hasUniqueSolution(grid) {
+    let solutionCount = 0;
+
+    function solve(grid) {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (grid[row][col] === 0) {
+                    for (let num = 1; num <= 9; num++) {
+                        if (isValid(grid, row, col, num)) {
+                            grid[row][col] = num;
+                            if (solve(grid)) {
+                                solutionCount++;
+                                if (solutionCount > 1) return false; // More than 1 solution
+                            }
+                            grid[row][col] = 0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    solve(grid);
+    return solutionCount === 1;
+}
+
+function generateSudoku(level) {
+    const solvedGrid = createSolvedGrid();
+
+    let numClues;
+    if (level === 'easy') {
+        numClues = Math.floor(Math.random() * (40 - 35 + 1)) + 35;  // Random number between 35 and 40
+    } else if (level === 'medium') {
+        numClues = Math.floor(Math.random() * (34 - 30 + 1)) + 30;  // Random number between 30 and 34
+    } else if (level === 'hard') {
+        numClues = Math.floor(Math.random() * (29 - 24 + 1)) + 24;  // Random number between 24 and 29
+    }
+
+    let puzzleGrid = removeCells(solvedGrid, numClues);
+
+    while (!hasUniqueSolution(puzzleGrid)) {
+        puzzleGrid = removeCells(solvedGrid, numClues);
+    }
+
+    return {
+        puzzle: puzzleGrid,
+        solution: solvedGrid
+    };
 }

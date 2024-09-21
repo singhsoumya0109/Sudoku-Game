@@ -1,7 +1,8 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32aksAkhic3DPyFxVsc_WzXOiCh8RMsl2Dg&s" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku</title>
     <link rel="stylesheet" href="style.css">
@@ -9,7 +10,24 @@
 <body>
     <h1>Sudoku</h1>
     <hr>
-    <div class="game">
+    <div class="level">
+        <h1>Select the level of the game</h1>
+        <div>
+            <button class="level-buttons">Easy</button>
+            <button class="level-buttons">Medium</button>
+            <button class="level-buttons">Hard</button>
+        </div>
+        <div class="info">
+            <p>Instructions:</p>
+            <ul>
+                <li>Choose a difficulty level to start the game.</li>
+                <li>Fill the board so that every row, column, and 3x3 grid contains the digits 1-9 exactly once.</li>
+                <li>Track your time and try to solve the puzzle as fast as you can!</li>
+                <li>Enjoy playing!!!</li>
+            </ul>
+        </div>
+    </div>
+    <div class="game hide">
         <div class="errors-container">
             <div class="errors">
                 <h2>Errors-0</h2>
@@ -29,7 +47,4 @@
     </div>
 </body>
 <script src="script.js"></script>
-</html> 
-
-
-
+</html>
