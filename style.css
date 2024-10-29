@@ -1,14 +1,33 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
 body {
+    
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    overflow-x: hidden;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.game1
+{
     text-align: center;
     justify-content: center;
     align-items: center;
     margin-left: 12.5%;
     margin-right: 12.5%;
-    color: white;
-    font-weight: bold;
-    background-color: black;
+    flex:1;
 }
-
 
 .level-buttons {
     font-size: 20px;
@@ -67,12 +86,12 @@ body {
     margin: 10px 0;
 }
 
-/* Footer styling */
-footer {
-    background-color: grey; /* Light gray background */
+/* footer1 styling */
+/* .footer {
+    background-color: grey; 
     padding: 20px;
+    margin-top: 20px;
     text-align: center;
-    position: fixed;
     width: 100%;
     bottom: 0;
     left: 0;
@@ -80,24 +99,53 @@ footer {
     border-top: 1px solid #ccc;
 }
 
-footer p {
+.footer p {
     margin: 0;
     color: black;
     font-weight: 50000;
 }
 
-footer a {
-    color: #6600cc; /* Link color */
+.footer a {
+    color: #6600cc; 
     text-decoration: none;
     font-weight: bold;
     margin: 0 10px;
 }
 
-footer a:hover {
+.footer a:hover {
     text-decoration: underline;
-    color: #003366; /* Change color on hover */
+    color: #003366; 
+} */
+
+
+/* Footer styling */
+.footer {
+    background-color: grey;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
 }
 
+.footer p {
+    margin: 0;
+    color: black;
+    font-weight: 5000;
+}
+
+.footer a {
+    color: #6600cc;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #003366;
+}
 .hide
 {
     display: none;

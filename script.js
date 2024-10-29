@@ -916,21 +916,56 @@ function hasUniqueSolution(grid) {
     return solutionCount === 1;
 }
 
-function generateSudoku(level) {
-    const solvedGrid = createSolvedGrid();
+// function generateSudoku(level) {
+//     const solvedGrid = createSolvedGrid();
 
+//     let numClues;
+//     if (level === 'easy') {
+//         numClues = Math.floor(Math.random() * (40 - 35 + 1)) + 35;  // Random number between 35 and 40
+//     } else if (level === 'medium') {
+//         numClues = Math.floor(Math.random() * (34 - 30 + 1)) + 30;  // Random number between 30 and 34
+//     } else if (level === 'hard') {
+//         numClues = Math.floor(Math.random() * (30 - 27 + 1)) + 27;  // Random number between 24 and 29
+//     }
+
+//     let puzzleGrid = removeCells(solvedGrid, numClues);
+
+//     while (!hasUniqueSolution(puzzleGrid)) {
+//         puzzleGrid = removeCells(solvedGrid, numClues);
+//     }
+
+//     return {
+//         puzzle: puzzleGrid,
+//         solution: solvedGrid
+//     };
+// }
+
+
+function generateSudoku(level) {
+    const startTime = Date.now();
+    const timeLimit = 4000;  // 4 seconds
+
+    let solvedGrid = createSolvedGrid();
     let numClues;
+
     if (level === 'easy') {
-        numClues = Math.floor(Math.random() * (40 - 35 + 1)) + 35;  // Random number between 35 and 40
+        numClues = Math.floor(Math.random() * (40 - 35 + 1)) + 35;
     } else if (level === 'medium') {
-        numClues = Math.floor(Math.random() * (34 - 30 + 1)) + 30;  // Random number between 30 and 34
+        numClues = Math.floor(Math.random() * (34 - 30 + 1)) + 30;
     } else if (level === 'hard') {
-        numClues = Math.floor(Math.random() * (29 - 24 + 1)) + 24;  // Random number between 24 and 29
+        numClues = Math.floor(Math.random() * (30 - 27 + 1)) + 27;
     }
 
     let puzzleGrid = removeCells(solvedGrid, numClues);
 
     while (!hasUniqueSolution(puzzleGrid)) {
+        // Check if we've exceeded the time limit
+        if (Date.now() - startTime > timeLimit) {
+            console.log("Restarting due to timeout...");
+            return generateSudoku(level);  // Restart the process
+        }
+        
+        // Try generating a new puzzle with the same solved grid
         puzzleGrid = removeCells(solvedGrid, numClues);
     }
 

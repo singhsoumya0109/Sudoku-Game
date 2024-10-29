@@ -8,53 +8,59 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Sudoku</h1>
-    <hr>
-    <div class="level">
-        <h1>Select the level of the game</h1>
-        <div>
-            <button class="level-buttons">Easy</button>
-            <button class="level-buttons">Medium</button>
-            <button class="level-buttons">Hard</button>
-        </div>
-        <div class="info">
-            <p>Instructions:</p>
-            <ul>
-                <li>Choose a difficulty level to start the game.</li>
-                <li>Fill the board so that every row, column, and 3x3 grid contains the digits 1-9 exactly once.</li>
-                <li>Track your time and try to solve the puzzle as fast as you can!</li>
-                <li>Enjoy playing!!!</li>
-            </ul>
-        </div>
-    </div>
-    <div class="game hide">
-        <div class="errors-container">
-            <div class="errors">
-                <h2>Errors-0</h2>
+    <div class="container">
+        <div class="game1">
+            <h1>Sudoku</h1>
+            <hr>
+            <div class="level">
+                <h1>Select the level of the game</h1>
+                <div>
+                    <button class="level-buttons">Easy</button>
+                    <button class="level-buttons">Medium</button>
+                    <button class="level-buttons">Hard</button>
+                </div>
+                <div class="info">
+                    <p>Instructions:</p>
+                    <ul>
+                        <li>Choose a difficulty level to start the game.</li>
+                        <li>Fill the board so that every row, column, and 3x3 grid contains the digits 1-9 exactly once.</li>
+                        <li>Track your time and try to solve the puzzle as fast as you can!</li>
+                        <li>Enjoy playing!!!</li>
+                    </ul>
+                </div>
             </div>
-            <div class="timer">
-                <h3>00:00</h3>
+            <div class="game hide">
+                <div class="errors-container">
+                    <div class="errors">
+                        <h2>Errors-0</h2>
+                    </div>
+                    <div class="timer">
+                        <h3>00:00</h3>
+                    </div>
+                </div>
+                <div class="board"></div>
+                <br>
+                <div class="digits"></div>
             </div>
+            
+            <div class="result hide">
+               <h1></h1>
+               <button class="new-game">New game</button>
+            </div>
+        
         </div>
-        <div class="board"></div>
-        <br>
-        <div class="digits"></div>
+       
+        <!-- Footer section -->
+        <div class="footer">
+            <p>Created by Soumyadeep Singh</p>
+            <p>
+                <a href="https://www.linkedin.com/in/soumyadeep-singh-347044258/" target="_blank">LinkedIn</a> | 
+                <a href="https://github.com/singhsoumya0109" target="_blank">GitHub</a> | 
+                <a href="https://singhsoumya0109.github.io/Portfolio-website/" target="_blank">Portfolio</a>
+            </p>
+        </div>
     </div>
-    
-    <div class="result hide">
-       <h1></h1>
-       <button class="new-game">New game</button>
-    </div>
-
-    <!-- Footer section -->
-    <!-- <footer>
-        <p>Created by Soumyadeep Singh</p>
-        <p>
-            <a href="https://www.linkedin.com/in/soumyadeep-singh-347044258/" target="_blank">LinkedIn</a> | 
-            <a href="https://github.com/singhsoumya0109" target="_blank">GitHub</a> | 
-            <a href="https://singhsoumya0109.github.io/Portfolio-website/" target="_blank">Portfolio</a>
-        </p>
-    </footer> -->
 </body>
+
 <script src="script.js"></script>
 </html>
